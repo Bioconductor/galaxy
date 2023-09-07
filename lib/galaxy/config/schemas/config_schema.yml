@@ -1450,6 +1450,14 @@ mapping:
           Especially useful for avoiding the need for wildcard certificates by keeping
           subdomain under 63 chars
 
+      interactivetools_verify_ssl:
+        type: bool
+        default: false
+        required: false
+        desc: |
+          Do not mark interactive tool endpoint as active until an HTTPS connection
+          can be established
+
       retry_interactivetool_metadata_internally:
         type: bool
         default: true
