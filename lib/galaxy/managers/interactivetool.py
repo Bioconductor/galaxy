@@ -320,6 +320,7 @@ class InteractiveToolManager:
                     return True
                 else:
                     return False
+
             if self.app.config.interactivetools_verify_ssl:
                 if __ssl_verified(rval):
                     return rval
