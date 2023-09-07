@@ -1292,6 +1292,10 @@ galaxy:
   # certificates by keeping subdomain under 63 chars
   #interactivetools_shorten_url: false
 
+  # Do not mark interactive tool endpoint as active until an HTTPS
+  # connection can be established
+  #interactivetools_verify_ssl: false
+
   # Galaxy Interactive Tools (GxITs) can be stopped from within the
   # Galaxy interface, killing the GxIT job without completing its
   # metadata setting post-job steps. In such a case it may be desirable
