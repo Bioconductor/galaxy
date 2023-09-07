@@ -1,4 +1,5 @@
 import logging
+import requests
 import sqlite3
 
 from sqlalchemy import or_
@@ -301,12 +302,29 @@ class InteractiveToolManager:
             if entry_point.requires_domain:
                 rval = f"{protocol}//{self.get_entry_point_subdomain(trans, entry_point)}.{request_host}/"
                 if entry_point.entry_url:
-                    rval = "{}/{}".format(rval.rstrip("/"), entry_point.entry_url.lstrip("/"))
+                    entry_url = entry_point.entry_url
+                    if entry_url != "/":
+                        entry_url = entry_url.lstrip("/")
+                    rval = "{}/{}".format(rval.rstrip("/"), entry_url)
             else:
                 rval = self.get_entry_point_path(trans, entry_point)
                 if not self.app.config.interactivetools_upstream_proxy and self.app.config.interactivetools_proxy_host:
                     rval = f"{protocol}//{request_host}{rval}"
-            return rval
+
+            def __ssl_verified(url):
+                try:
+                    r = requests.get(url)
+                except requests.exceptions.SSLError:
+                    return False
+                if r.status_code == 200:
+                    return True
+                else:
+                    return False
+            if self.app.config.interactivetools_verify_ssl:
+                if __ssl_verified(rval):
+                    return rval
+            else:
+                return rval
 
     def get_entry_point_subdomain(self, trans, entry_point):
         entry_point_encoded_id = trans.security.encode_id(entry_point.id)
