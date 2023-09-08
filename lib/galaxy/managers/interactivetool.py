@@ -1,7 +1,7 @@
 import logging
-import requests
 import sqlite3
 
+import requests
 from sqlalchemy import or_
 
 from galaxy import (
