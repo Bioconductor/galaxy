@@ -64,6 +64,7 @@ jobs:
               IMAGE_TAG=${{ steps.branch.outputs.name }}
           file: .k8s_ci.Dockerfile
           push: true
+          context: .
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           platforms: linux/amd64
