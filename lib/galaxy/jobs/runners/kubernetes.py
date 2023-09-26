@@ -424,40 +424,40 @@ class KubernetesJobRunner(AsynchronousJobRunner):
         """This represents the template for the "rules" portion of the Ingress spec."""
         if "v1beta1" in self.runner_params.get("k8s_ingress_api_version"):
             rules_spec = [{
-                            "host": ep["domain"],
-                            "http": {
-                                "paths": [{
-                                    "backend": {
-                                        "serviceName": self.__get_k8s_job_name(
-                                            self.__produce_k8s_job_prefix(), ajs.job_wrapper
-                                        ),
-                                        "servicePort": int(ep["tool_port"]),
-                                    },
-                                    "path": ep.get("entry_path", "/"),
-                                    "pathType": "Prefix",
-                                }]
-                            },
-                         } for ep in entry_points]
+                "host": ep["domain"],
+                "http": {
+                    "paths": [{
+                        "backend": {
+                            "serviceName": self.__get_k8s_job_name(
+                                self.__produce_k8s_job_prefix(), ajs.job_wrapper
+                            ),
+                            "servicePort": int(ep["tool_port"]),
+                        },
+                        "path": ep.get("entry_path", "/"),
+                        "pathType": "Prefix",
+                    }]
+                },
+             } for ep in entry_points]
         else:
             rules_spec = [{
-                            "host": ep["domain"],
-                            "http": {
-                                "paths": [{
-                                    "backend": {
-                                        "service": {
-                                            "name": self.__get_k8s_job_name(
-                                                self.__produce_k8s_job_prefix(), ajs.job_wrapper
-                                            ),
-                                            "port": {
-                                                "number": int(ep["tool_port"])
-                                            },
-                                        }
-                                    },
-                                    "path": ep.get("entry_path", "/"),
-                                    "pathType": "ImplementationSpecific",
-                                }]
-                            },
-                        } for ep in entry_points]
+                "host": ep["domain"],
+                "http": {
+                    "paths": [{
+                        "backend": {
+                            "service": {
+                                "name": self.__get_k8s_job_name(
+                                    self.__produce_k8s_job_prefix(), ajs.job_wrapper
+                                ),
+                                "port": {
+                                    "number": int(ep["tool_port"])
+                                },
+                            }
+                        },
+                        "path": ep.get("entry_path", "/"),
+                        "pathType": "ImplementationSpecific",
+                    }]
+                },
+            } for ep in entry_points]
         return rules_spec
 
     def __get_k8s_ingress_spec(self, ajs):
