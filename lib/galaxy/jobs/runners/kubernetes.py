@@ -437,7 +437,7 @@ class KubernetesJobRunner(AsynchronousJobRunner):
                         "pathType": "Prefix",
                     }]
                 },
-             } for ep in entry_points]
+            } for ep in entry_points]
         else:
             rules_spec = [{
                 "host": ep["domain"],
