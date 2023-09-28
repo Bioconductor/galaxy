@@ -18,8 +18,8 @@ from galaxy.jobs.runners import (
 )
 from galaxy.jobs.runners.util.pykube_util import (
     deduplicate_entries,
-    DEFAULT_JOB_API_VERSION,
     DEFAULT_INGRESS_API_VERSION,
+    DEFAULT_JOB_API_VERSION,
     delete_ingress,
     delete_job,
     delete_service,
