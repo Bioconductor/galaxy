@@ -1529,6 +1529,14 @@ mapping:
         desc: |
           Prefix to use in the formation of the subdomain or path for interactive tools
 
+      interactivetools_verify_ssl:
+        type: bool
+        default: false
+        required: false
+        desc: |
+          Do not mark interactive tool endpoint as active until an HTTPS connection
+          can be established
+
       retry_interactivetool_metadata_internally:
         type: bool
         default: true

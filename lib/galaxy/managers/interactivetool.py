@@ -6,6 +6,7 @@ from urllib.parse import (
     urlunsplit,
 )
 
+import requests
 from sqlalchemy import (
     or_,
     select,
@@ -296,6 +297,18 @@ class InteractiveToolManager:
                 self.sa_session.commit()
         self.propagator.remove_entry_point(entry_point)
 
+    def _ssl_check(self, url):
+        if self.app.config.interactivetools_verify_ssl:
+            try:
+                r = requests.get(url)
+            except requests.exceptions.SSLError:
+                return False
+            if r.status_code == 200:
+                return True
+            else:
+                return False
+        return True
+
     def target_if_active(self, trans, entry_point):
         if entry_point.active and not entry_point.deleted:
             use_it_proxy_host_cfg = (
@@ -315,7 +328,9 @@ class InteractiveToolManager:
                 if not use_it_proxy_host_cfg:
                     return url_path
 
-            return urlunsplit((url_parts.scheme, url_host, url_path, "", ""))
+            end_url = urlunsplit((url_parts.scheme, url_host, url_path, "", ""))
+            if self._ssl_check(end_url):
+                return end_url
 
     def _get_entry_point_url_elements(self, trans, entry_point):
         encoder = IdAsLowercaseAlphanumEncodingHelper(trans.security)
