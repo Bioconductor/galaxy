@@ -29,7 +29,7 @@ export const Activities = [
         title: "Upload",
         to: null,
         tooltip: "Download from URL or upload files from disk",
-        visible: true,
+        visible: false,
     },
     {
         anonymous: true,
@@ -42,7 +42,7 @@ export const Activities = [
         title: "Tools",
         to: null,
         tooltip: "Search and run tools",
-        visible: true,
+        visible: false,
     },
     {
         anonymous: true,
@@ -55,7 +55,7 @@ export const Activities = [
         title: "Workflows",
         to: "/workflows/list",
         tooltip: "Search and run workflows",
-        visible: true,
+        visible: false,
     },
     {
         anonymous: false,
@@ -68,7 +68,7 @@ export const Activities = [
         title: "Workflow Invocations",
         tooltip: "Show all workflow runs",
         to: null,
-        visible: true,
+        visible: false,
     },
     {
         anonymous: true,
@@ -81,7 +81,7 @@ export const Activities = [
         title: "Visualization",
         to: null,
         tooltip: "Visualize datasets",
-        visible: true,
+        visible: false,
     },
     {
         anonymous: true,
@@ -94,7 +94,7 @@ export const Activities = [
         title: "Histories",
         tooltip: "Show all histories",
         to: "/histories/list",
-        visible: true,
+        visible: false,
     },
     {
         anonymous: false,
@@ -107,7 +107,7 @@ export const Activities = [
         title: "History Multiview",
         tooltip: "Select histories to show in History Multiview",
         to: "/histories/view_multiple",
-        visible: true,
+        visible: false,
     },
     {
         anonymous: false,
@@ -120,7 +120,7 @@ export const Activities = [
         title: "Datasets",
         tooltip: "Show all datasets",
         to: "/datasets/list",
-        visible: true,
+        visible: false,
     },
     {
         anonymous: true,
@@ -133,7 +133,7 @@ export const Activities = [
         title: "Pages",
         tooltip: "Show all pages",
         to: "/pages/list",
-        visible: true,
+        visible: false,
     },
     {
         anonymous: false,
@@ -146,7 +146,7 @@ export const Activities = [
         title: "Libraries",
         tooltip: "Access Data Libraries",
         to: "/libraries",
-        visible: true,
+        visible: false,
     },
 ];
 
@@ -163,7 +163,7 @@ export function convertDropData(data: EventData): Activity | null {
             title: data.name as string,
             tooltip: "View your dataset",
             to: `/datasets/${data.id}/preview`,
-            visible: true,
+            visible: false,
         };
     }
     if (data.model_class === "StoredWorkflow") {
@@ -178,7 +178,7 @@ export function convertDropData(data: EventData): Activity | null {
             title: data.name as string,
             tooltip: data.name as string,
             to: `/workflows/run?id=${data.id}`,
-            visible: true,
+            visible: false,
         };
     }
     return null;
