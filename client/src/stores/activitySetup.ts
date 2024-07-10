@@ -31,15 +31,15 @@ export const Activities = [
     },
     {
         anonymous: true,
-        description: "Displays the tool panel to search and access all available tools.",
+        description: "Displays the panel to search and access all available workshops.",
         icon: "wrench",
         id: "tools",
         mutable: false,
         optional: false,
-        title: "Tools",
+        title: "Workshops",
         to: null,
         tooltip: "Search and run tools",
-        visible: false,
+        visible: true,
     },
     {
         anonymous: false,
