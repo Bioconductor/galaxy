@@ -19,101 +19,6 @@ export function fetchMenu(options = {}) {
     });
 
     //
-    // Workflow tab.
-    //
-    menu.push({
-        id: "workflow",
-        title: _l("Workflow"),
-        tooltip: _l("Chain tools into workflows"),
-        disabled: !Galaxy.user.id,
-        url: "/workflows/list",
-    });
-
-    //
-    // Visualization tab.
-    //
-    if (Galaxy.config.visualizations_visible) {
-        menu.push({
-            id: "visualization",
-            title: _l("Visualize"),
-            tooltip: _l("Visualize datasets"),
-            disabled: !Galaxy.user.id,
-            url: "/visualizations",
-        });
-    }
-
-    //
-    // 'Data' tab.
-    //
-    if (Galaxy.user.id) {
-        menu.push({
-            id: "resources",
-            title: _l("Data"),
-            url: "javascript:void(0)",
-            tooltip: _l("Access resources"),
-            menu: [
-                {
-                    title: _l("Data Libraries"),
-                    url: "/libraries",
-                },
-                {
-                    title: _l("Datasets"),
-                    url: "/datasets/list",
-                },
-                {
-                    title: _l("Histories"),
-                    url: "/histories/list",
-                },
-                {
-                    title: _l("Pages"),
-                    url: "/pages/list",
-                },
-                {
-                    title: _l("Visualizations"),
-                    url: "/visualizations/list",
-                },
-                {
-                    title: _l("Workflows"),
-                    url: "/workflows/list",
-                },
-                {
-                    title: _l("Workflow Invocations"),
-                    url: "/workflows/invocations",
-                },
-            ],
-        });
-    } else {
-        menu.push({
-            id: "resources",
-            title: _l("Data"),
-            url: "javascript:void(0)",
-            tooltip: _l("Access published resources"),
-            menu: [
-                {
-                    title: _l("Data Libraries"),
-                    url: "/libraries",
-                },
-                {
-                    title: _l("Histories"),
-                    url: "/histories/list_published",
-                },
-                {
-                    title: _l("Pages"),
-                    url: "/pages/list_published",
-                },
-                {
-                    title: _l("Visualizations"),
-                    url: "/visualizations/list_published",
-                },
-                {
-                    title: _l("Workflows"),
-                    url: "/workflows/list_published",
-                },
-            ],
-        });
-    }
-
-    //
     // Admin.
     //
     if (Galaxy.user.get("is_admin")) {
@@ -137,44 +42,23 @@ export function fetchMenu(options = {}) {
         id: "help",
         title: _l("Help"),
         url: "javascript:void(0)",
-        tooltip: _l("Support, contact, and community"),
+        tooltip: _l("Support"),
         menu: [
             {
-                title: _l("Galaxy Help"),
+                title: _l("Bioconductor Support"),
                 url: options.helpsite_url,
                 target: "_blank",
                 hidden: !options.helpsite_url,
             },
             {
-                title: _l("Support"),
-                url: options.support_url,
+                title: _l("Bioconductor Site"),
+                url: "https://bioconductor.org",
                 target: "_blank",
-                hidden: !options.support_url,
-            },
-            {
-                title: _l("Videos"),
-                url: options.screencasts_url,
-                target: "_blank",
-                hidden: !options.screencasts_url,
-            },
-            {
-                title: _l("Community Hub"),
-                url: options.wiki_url,
-                target: "_blank",
-                hidden: !options.wiki_url,
             },
             {
                 title: _l("How to Cite Galaxy"),
                 url: options.citation_url,
                 target: "_blank",
-            },
-            {
-                title: _l("Interactive Tours"),
-                url: "/tours",
-            },
-            {
-                title: _l("About"),
-                url: "/about",
             },
             {
                 title: _l("Terms and Conditions"),

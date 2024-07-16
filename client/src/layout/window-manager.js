@@ -18,7 +18,7 @@ export class WindowManager {
             id: "enable-window-manager",
             icon: "fa-th",
             tooltip: _l("Enable/Disable Window Manager"),
-            visible: true,
+            visible: false,
             onclick: () => {
                 this.active = !this.active;
             },
